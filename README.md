@@ -1,16 +1,22 @@
-# Automotive Production Performance Audit 🏭
+# 🏭 Automotive Efficiency Analytics | OEE Audit
 
-## Project Overview
-This project focuses on calculating and analyzing the **OEE (Overall Equipment Effectiveness)** of a production line. The goal is to identify operational bottlenecks and provide data-driven insights for manufacturing excellence.
+## 📋 Overview
+This project presents a comprehensive **Industrial Audit** of a manufacturing production line (Line A). The objective was to identify operational bottlenecks and calculate the **Overall Equipment Effectiveness (OEE)** to drive productivity improvements.
 
-## Key Performance Indicators (KPIs)
-* **Availability (84%):** Identified losses due to mechanical failures (45 min) and changeovers (25 min).
-* **Quality (96%):** High output standard with minimal scrap (120 units).
-* **Performance (100%):** The line operated at its ideal cycle time during active hours.
-* **Total OEE: 81%**
+## 🛠️ Tech Stack
+- **Power BI:** Interactive KPI Dashboard and data visualization.
+- **Python (Pandas):** Automated scripts for Availability, Performance, and Quality KPIs.
+- **Excel:** Raw audit data source and downtime records.
 
-## Root Cause Analysis & Recommendations
-Although the OEE is solid, the main **bottleneck** is Availability. 
-**Action Plan:**
-1. Implement a **SMED** (Single-Minute Exchange of Die) pilot to reduce setup times.
-2. Review the **Preventive Maintenance** schedule to decrease mechanical downtime.
+## 📊 Business Insights (OEE: 80.4%)
+Analysis results from the production audit:
+- **Availability (85.4%):** Detected 70 minutes of downtime due to mechanical adjustments.
+- **Performance (97.6%):** High-speed operation, consistent with ideal cycle times.
+- **Quality (96.0%):** Stable manufacturing process with minimal scrap.
+
+## 📂 Project Structure
+- `OEE_Analysis.ipynb`: Python automation script.
+- `OEE_Audit_Dashboard.pbix`: Interactive Power BI Report.
+- `OEE_Audit_Report_Production_Line_A.xlsx`: Source Audit Data.
+
+> **Conclusion:** Reducing mechanical downtime by just 5% would elevate the OEE to "World Class" levels (>85%), significantly increasing plant profitability.
