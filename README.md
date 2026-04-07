@@ -13,7 +13,7 @@
 ---
 
 ## 📸 Dashboard Preview
-![OEE Dashboard Preview](dashboard_preview.png)
+![OEE Dashboard Preview](reports/dashboard_preview.png)
 
 ---
 
