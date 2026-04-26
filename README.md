@@ -45,3 +45,11 @@ Based on the audit findings, the following actions are proposed:
 * `scripts/`: Advanced SQL queries for OEE calculation.
 * `notebooks/`: Python script for automated data processing.
 * `reports/`: Power BI `.pbix` file and the final dashboard preview.
+## 📬 Contact
+
+**Basilia del Pozo Salgado**  
+Data Analyst | Business Intelligence  
+
+LinkedIn: https://www.linkedin.com/in/basilia-del-pozo-salgado-93219738b/  
+GitHub: https://github.com/batizia2-ui  
+Email: batizia2@gmail.com
