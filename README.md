@@ -43,7 +43,7 @@ Based on the audit findings, the following actions are proposed:
 
 ## 📂 Project Structure
 * `scripts/`: Advanced SQL queries for OEE calculation.
-* `notebooks/`: Python script for automated data processing.
+* `notebooks/`: Exploratory Data Analysis (EDA) and data processing workflows.
 * `reports/`: Power BI `.pbix` file and the final dashboard preview.
 ## 📬 Contact
 
