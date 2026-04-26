@@ -1,38 +1,39 @@
-/* Project: Automotive Efficiency Analytics
-   Author: Basilia del Pozo
-   Description: SQL Logic to calculate OEE metrics from raw production data.
-*/
+-- Project: Automotive Efficiency Analytics
+-- File: OEE_Calculation_Logic.sql
+-- Purpose: Calculate OEE (Availability, Performance, Quality)
+-- Business Context: Identify efficiency losses in stamping line
 
-WITH ProductionData AS (
-    SELECT 
-        Line_ID,
-        Shift_Date,
-        Planned_Time_Min,        -- Total shift duration
-        Downtime_Min,            -- Total downtime (e.g., 70 min Mechanical Failure)
-        Total_Units,             -- Total items produced
-        Good_Units,              -- Items meeting quality standards
-        Ideal_Cycle_Time_Sec     -- Standard production rate
-    FROM Stamping_Line_Audit
+WITH base AS (
+    SELECT
+        SUM(planned_time_minutes) AS planned_time,
+        SUM(operating_time_minutes) AS operating_time,
+        SUM(total_units) AS total_units,
+        SUM(good_units) AS good_units
+    FROM data
 ),
-KPI_Calculations AS (
-    SELECT 
-        *,
-        -- Availability = (Operating Time / Planned Time)
-        ROUND(CAST((Planned_Time_Min - Downtime_Min) AS FLOAT) / Planned_Time_Min, 4) AS Availability,
-        
-        -- Performance = (Ideal Time * Total Units) / Operating Time
-        ROUND(CAST((Ideal_Cycle_Time_Sec * Total_Units) / 60.0 AS FLOAT) / (Planned_Time_Min - Downtime_Min), 4) AS Performance,
-        
-        -- Quality = (Good Units / Total Units)
-        ROUND(CAST(Good_Units AS FLOAT) / NULLIF(Total_Units, 0), 4) AS Quality
-    FROM ProductionData
+metrics AS (
+    SELECT
+        planned_time,
+        operating_time,
+        total_units,
+        good_units,
+        CASE 
+            WHEN planned_time = 0 THEN 0
+            ELSE ROUND((operating_time * 100.0) / planned_time, 2)
+        END AS availability_pct,
+        CASE 
+            WHEN operating_time = 0 THEN 0
+            ELSE ROUND((total_units * 100.0) / operating_time, 2)
+        END AS performance_pct,
+        CASE 
+            WHEN total_units = 0 THEN 0
+            ELSE ROUND((good_units * 100.0) / total_units, 2)
+        END AS quality_pct
+    FROM base
 )
-SELECT 
-    Line_ID,
-    Shift_Date,
-    Availability,
-    Performance,
-    Quality,
-    -- Final OEE = A * P * Q
-    ROUND(Availability * Performance * Quality, 4) AS Overall_OEE
-FROM KPI_Calculations;
+SELECT
+    availability_pct,
+    performance_pct,
+    quality_pct,
+    ROUND((availability_pct * performance_pct * quality_pct) / 10000.0, 2) AS oee_pct
+FROM metrics; 
